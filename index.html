@@ -1,0 +1,412 @@
+<!-- File: index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portfolio — seastudios</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Favicons / icons via Iconify (multiple sizes) -->
+    <link rel="icon" href="https://api.iconify.design/mdi/compass.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://api.iconify.design/mdi/compass.png?color=%23005573">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://api.iconify.design/mdi/anchor.png?color=%232a9d8f">
+    <link rel="apple-touch-icon" href="https://api.iconify.design/mdi/briefcase-outline.svg?color=%23005573">
+    <link rel="mask-icon" href="https://api.iconify.design/mdi/compass.svg" color="#005f73">
+
+    <!-- External CSS (if present) -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Palette & component overrides to apply seablue theme and responsive rules -->
+    <style>
+        :root{
+            /* Seablue palette */
+            --sea-blue: #005f73;     /* deep seablue */
+            --sea-green: #2a9d8f;    /* teal/sea green */
+            --sea-accent: #80e6d9;   /* light aqua */
+            --bg: #f4fbfb;
+            --muted: #6b7b80;
+            --card-radius: 14px;
+            --shadow: 0 10px 30px rgba(3,30,33,0.12);
+            --container-max: 1100px;
+            font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        }
+
+        /* Base */
+        *{box-sizing:border-box}
+        html,body{height:100%}
+        body{ margin:0; background: linear-gradient(180deg,#f9fefc 0%, var(--bg) 100%); color:#07343a; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+
+        /* Container */
+        .container{ width:100%; max-width:var(--container-max); margin:0 auto; padding:0 18px; }
+
+        /* Header / logo */
+        .site-header{ background: transparent; position:sticky; top:0; z-index:60; padding:14px 0; backdrop-filter: blur(6px); }
+        .header-inner{ display:flex; align-items:center; gap:16px; justify-content:space-between; }
+        .logo{ display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--sea-blue); font-weight:700; }
+        .logo-mark{
+            width:44px; height:44px; border-radius:10px;
+            display:inline-grid; place-items:center; color:white; font-weight:800;
+            background: linear-gradient(135deg,var(--sea-blue),var(--sea-green));
+            box-shadow: var(--shadow);
+            font-family: "Montserrat", sans-serif;
+        }
+        .brand{ text-transform:lowercase; font-family:"Montserrat",sans-serif; font-size:18px; letter-spacing:0.6px; }
+
+        /* nav */
+        .nav { display:flex; align-items:center; }
+        .nav-links{ display:flex; gap:18px; list-style:none; margin:0; padding:0; align-items:center; }
+        .nav-links a{ color:var(--sea-blue); text-decoration:none; font-weight:600; padding:8px 10px; border-radius:8px; }
+        .nav-links a:hover{ background:rgba(0,95,115,0.06); }
+
+        /* mobile menu toggle */
+        .menu-toggle{
+            display:none;
+            width:44px; height:44px; border-radius:8px; background:transparent; border:0; cursor:pointer;
+            align-items:center; justify-content:center;
+        }
+        .hamburger, .hamburger::before, .hamburger::after{
+            display:block; width:20px; height:2px; background:var(--sea-blue); border-radius:2px; position:relative;
+        }
+        .hamburger::before, .hamburger::after{ content:""; position:absolute; left:0; }
+        .hamburger::before{ top:-6px; }
+        .hamburger::after{ top:6px; }
+
+        /* HERO */
+        .hero{
+            padding:56px 0;
+            background: linear-gradient(135deg, rgba(0,95,115,0.03), rgba(42,157,143,0.02));
+            overflow:hidden; position:relative;
+        }
+        .hero-grid{ display:grid; grid-template-columns: 1fr 420px; gap:36px; align-items:center; }
+        .hero-text h1{ font-family:"Montserrat",sans-serif; font-size:44px; margin:0 0 12px; color:var(--sea-blue); line-height:1.05; }
+        .lead{ color:var(--muted); font-size:16px; margin-bottom:18px; max-width:56ch; }
+        .btn-primary{
+            display:inline-block; padding:12px 18px; border-radius:12px;
+            background: linear-gradient(90deg,var(--sea-blue),var(--sea-green));
+            color:white; text-decoration:none; font-weight:600; box-shadow:0 6px 18px rgba(0,80,90,0.14)
+        }
+        .btn-outline{
+            display:inline-block; padding:10px 14px; border-radius:10px; border:1px solid rgba(0,95,115,0.12); color:var(--sea-blue); text-decoration:none; font-weight:600;
+            background:transparent;
+        }
+
+        .hero-image{
+            justify-self:end; position:relative;
+            background: linear-gradient(180deg,var(--sea-accent),rgba(255,255,255,0));
+            border-radius:var(--card-radius); padding:12px; box-shadow:var(--shadow);
+        }
+        .hero-image img{
+            width:360px; height:480px; object-fit:cover; border-radius:10px; display:block;
+            box-shadow: 0 10px 30px rgba(5,40,50,0.08);
+        }
+
+        /* decorative waves */
+        .hero::after{
+            content:""; position:absolute; right:-120px; top:-80px; width:480px; height:480px;
+            background: radial-gradient(circle at 30% 30%, rgba(42,157,143,0.06), transparent 20%),
+                        radial-gradient(circle at 70% 70%, rgba(0,95,115,0.05), transparent 30%);
+            border-radius:50%;
+            pointer-events:none;
+            transform:translateZ(0);
+        }
+
+        /* Cards, Projects etc left mostly untouched by this override */
+
+        /* Modernized contact section */
+        .contact{ padding:56px 0; background:linear-gradient(180deg, rgba(42,157,143,0.02), transparent 60%); }
+        .contact-grid{ display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:start; }
+        .contact-form{
+            background:white; padding:22px; border-radius:12px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:12px;
+        }
+        .contact-form label{ display:block; font-size:13px; color:var(--muted); font-weight:600; }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea{
+            width:100%; padding:12px 14px; border-radius:10px; border:1px solid #e6efee; background:linear-gradient(180deg,#fff,#fbfffe);
+            font-size:15px; color:#04464a;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+        }
+        .contact-form textarea{ resize:vertical; min-height:140px; }
+        .contact-form .btn-primary{ align-self:flex-start; margin-top:6px; }
+
+        .contact-info{ background:linear-gradient(180deg,var(--sea-blue),var(--sea-green)); color:white; padding:20px; border-radius:12px; box-shadow:var(--shadow); }
+        .contact-info h3{ margin:0 0 6px; font-family:"Montserrat",sans-serif; font-size:20px; }
+        .contact-info p{ margin:0 0 12px; color:rgba(255,255,255,0.92) }
+        .contact-info ul{ list-style:none; padding:0; margin:0 0 12px; color:rgba(255,255,255,0.95); }
+        .contact-info li{ margin-bottom:8px; font-weight:600; font-size:14px; }
+        .social{ display:flex; gap:10px; margin-top:8px; }
+        .social a{ display:inline-grid; place-items:center; width:44px; height:44px; border-radius:8px; background:rgba(255,255,255,0.12); color:white; text-decoration:none; }
+        .social img{ width:20px; height:20px; filter:invert(1) sepia(0.1) saturate(0.8) hue-rotate(150deg); }
+
+        /* Projects grid / cards responsiveness */
+        .projects-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+        .project-card{ background:white; border-radius:12px; overflow:hidden; box-shadow:var(--shadow); display:flex; flex-direction:column; }
+        .project-card img{ width:100%; height:160px; object-fit:cover; display:block; }
+        .project-info{ padding:14px; }
+
+        /* Skills grid */
+        .skills-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+
+        /* Responsive breakpoints */
+        @media (max-width:1100px){
+            .hero-grid, .contact-grid{ grid-template-columns: 1fr 360px; }
+            .projects-grid{ grid-template-columns: repeat(2,1fr); }
+        }
+        @media (max-width:880px){
+            /* mobile layout: stack columns */
+            .menu-toggle{ display:flex; z-index:80; }
+            /* full-screen mobile nav that sits under the header and is scrollable */
+            .nav{
+                position:fixed;
+                inset:0 0 0 0;
+                padding-top:68px; /* leave space for the sticky header */
+                background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.98));
+                padding-left:18px;
+                padding-right:18px;
+                box-shadow:0 12px 40px rgba(0,0,0,0.06);
+                display:none;
+                z-index:70;
+                overflow:auto;
+            }
+            .nav.open{ display:flex; flex-direction:column; }
+            .nav-links{ flex-direction:column; gap:12px; margin-top:8px; }
+            .hero-grid, .contact-grid{ grid-template-columns:1fr; }
+            .hero-image img{ width:100%; height:auto; max-width:420px; }
+            .hero{ padding:28px 0; }
+            .projects-grid{ grid-template-columns:1fr; }
+            .skills-grid{ grid-template-columns:1fr; }
+            .contact-grid{ gap:18px; }
+            .site-header{ padding:10px 0; }
+        }
+
+        /* tablet adjustments */
+        @media (min-width:881px) and (max-width:1100px){
+            .hero-text h1{ font-size:40px; }
+        }
+
+        /* small improvements */
+        h2{ margin-top:0; font-family:"Montserrat",sans-serif; color:var(--sea-blue); }
+        .section{ padding-top:28px; padding-bottom:28px; }
+    </style>
+
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="logo" href="#home" aria-label="seastudios home">
+                <span class="logo-mark">SS</span>
+                <span class="brand">seastudios</span>
+            </a>
+
+            <button id="menu-toggle" class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span class="hamburger" aria-hidden="true"></span>
+            </button>
+
+            <nav class="nav" id="main-nav" aria-label="Main navigation">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="section hero">
+            <div class="container hero-grid">
+                <div class="hero-text">
+                    <h1>Hi, I'm Jeffrey Adongo - SeaStudios</h1>
+                    <p class="lead">Results-oriented Front End Developer with 2 years of experience building scalable web applications using React and Angular. </p>
+                    <div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                        <a class="btn-primary" href="#projects">View Projects</a>
+                        <a class="btn-outline" href="#contact">Hire me</a>
+                    </div>
+                </div>
+
+                <div class="hero-image" aria-hidden="false">
+                    <img src="images/myself.jpg" alt="Portrait — replace this with your portrait" />
+                </div>
+            </div>
+        </section>
+
+        <!-- About, Services, Skills, Projects remain mostly the same -->
+        <section id="about" class="section about">
+            <div class="container">
+                <h2>About</h2>
+                <div class="about-grid" style="display:grid; grid-template-columns:1fr 320px; gap:18px; align-items:center;">
+                    <div>
+                        <p>Write a short bio about yourself. Experience, interests, and what you're looking for.</p>
+                        <ul class="about-list">
+                            <li><strong>Location:</strong>Accra, Ghana</li>
+                            <li><strong>Role:</strong> Frontend / UI/UX / Designer</li>
+                            <li><strong>Email:</strong>arts.biz.gh@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="images/about.webp" alt="About image — replace with your own" style="width:100%; border-radius:10px; box-shadow:var(--shadow);" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section services">
+            <div class="container">
+                <h2>Services</h2>
+                <div class="cards" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;">
+                    <article class="card" style="padding:16px; border-radius:12px; background:white; box-shadow:var(--shadow);">
+                        <img src="https://api.iconify.design/mdi/code-tags.svg?color=%23005573" alt="Web Dev icon" style="width:36px;height:36px;">
+                        <h3>Web Development</h3>
+                        <p>Building responsive and accessible web apps with modern tools.</p>
+                    </article>
+                    <article class="card" style="padding:16px; border-radius:12px; background:white; box-shadow:var(--shadow);">
+                        <img src="https://api.iconify.design/mdi/vector-square.svg?color=%232a9d8f" alt="Design icon" style="width:36px;height:36px;">
+                        <h3>UI/UX Design</h3>
+                        <p>Designing intuitive interfaces and delightful user experiences.</p>
+                    </article>
+                    <article class="card" style="padding:16px; border-radius:12px; background:white; box-shadow:var(--shadow);">
+                        <img src="https://api.iconify.design/mdi/account-tie.svg?color=%23005573" alt="Consulting icon" style="width:36px;height:36px;">
+                        <h3>Consulting</h3>
+                        <p>Strategy, architecture and code reviews to accelerate your team.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="section skills">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill">
+                        <label>HTML & CSS</label>
+                        <div class="skill-bar" style="background:#eaf6f5; border-radius:8px; height:10px; overflow:hidden;"><div style="width:90%; height:100%; background:linear-gradient(90deg,var(--sea-blue),var(--sea-green));"></div></div>
+                    </div>
+                    <div class="skill">
+                        <label>JavaScript</label>
+                        <div class="skill-bar" style="background:#eaf6f5; border-radius:8px; height:10px; overflow:hidden;"><div style="width:80%; height:100%; background:linear-gradient(90deg,var(--sea-blue),var(--sea-green));"></div></div>
+                    </div>
+                    <div class="skill">
+                        <label>React</label>
+                        <div class="skill-bar" style="background:#eaf6f5; border-radius:8px; height:10px; overflow:hidden;"><div style="width:75%; height:100%; background:linear-gradient(90deg,var(--sea-blue),var(--sea-green));"></div></div>
+                    </div>
+                    <div class="skill">
+                        <label>Angular</label>
+                        <div class="skill-bar" style="background:#eaf6f5; border-radius:8px; height:10px; overflow:hidden;"><div style="width:70%; height:100%; background:linear-gradient(90deg,var(--sea-blue),var(--sea-green));"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section projects">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <img src="images/image-1.jpg" alt="Project 1 screenshot — replace image" />
+                        <div class="project-info">
+                            <h3>Project One</h3>
+                            <p>Built a coffe shop website.</p>
+                            <a class="btn-outline" href="#" target="_blank" rel="noopener">View</a>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <img src="images/image-2.png" alt="Project 2 screenshot — replace image" />
+                        <div class="project-info">
+                            <h3>Project Two</h3>
+                            <p>Designed a multiple page website for a Edify.edu foundation with Figma & Photoshop.</p>
+                            <a class="btn-outline" href="#" target="_blank" rel="noopener">View</a>
+                        </div>
+                    </article>
+                    <article class="project-card">
+                        <img src="images/image-3.jpg" alt="Project 3 screenshot — replace image" />
+                        <div class="project-info">
+                            <h3>Project Three</h3>
+                            <p>Front-end app with React.</p>
+                            <a class="btn-outline" href="#" target="_blank" rel="noopener">View</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2>Contact</h2>
+                <div class="contact-grid">
+                    <form id="contact-form" class="contact-form" action="#" method="post" novalidate>
+                        <label for="c-name">Name</label>
+                        <input id="c-name" type="text" name="name" placeholder="Your name" required>
+
+                        <label for="c-email">Email</label>
+                        <input id="c-email" type="email" name="email" placeholder="you@example.com" required>
+
+                        <label for="c-message">Message</label>
+                        <textarea id="c-message" name="message" rows="6" placeholder="Write a message..." required></textarea>
+
+                        <button class="btn-primary" type="submit">Send Message</button>
+                    </form>
+
+                    <aside class="contact-info" aria-labelledby="contact-heading">
+                        <h3 id="contact-heading">Let's work together</h3>
+                        <p>Open to freelance work, collaborations, and full-time roles. I'll get back within 48 hours.</p>
+                        <ul>
+                            <li><strong>Email:</strong> arts.biz.gh@gmail.com</li>
+                            <li><strong>Phone:</strong> +233 558 412 665</li>
+                            <li><strong>Location:</strong> Accra, Ghana</li>
+                        </ul>
+                        <div class="social" aria-label="social links">
+                            <a href="https://github.com/jeffrich368" aria-label="GitHub"><img src="https://api.iconify.design/simple-icons/github.svg?color=%23ffffff" alt="GitHub" width="20" height="20"></a>
+                            <a href="#" aria-label="LinkedIn"><img src="https://api.iconify.design/simple-icons/linkedin.svg?color=%23ffffff" alt="LinkedIn" width="20" height="20"></a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" style="padding:22px 0; background:transparent;">
+        <div class="container">
+            <p style="color:var(--muted); margin:0;">&copy; <span id="year"></span> seastudios — Built with HTML, CSS &amp; Javascript</p>
+        </div>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+    <script>
+        // set year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile nav toggle
+        (function(){
+            var toggle = document.getElementById('menu-toggle');
+            var nav = document.getElementById('main-nav');
+
+            function setExpanded(val){
+                toggle.setAttribute('aria-expanded', String(val));
+                if(val) nav.classList.add('open'); else nav.classList.remove('open');
+            }
+
+            toggle.addEventListener('click', function(){
+                var expanded = toggle.getAttribute('aria-expanded') === 'true';
+                setExpanded(!expanded);
+            });
+
+            // close nav when a link is clicked (mobile)
+            Array.from(nav.querySelectorAll('a')).forEach(function(a){
+                a.addEventListener('click', function(){ setExpanded(false); });
+            });
+
+            // close on resize to desktop
+            window.addEventListener('resize', function(){
+                if(window.innerWidth > 880) setExpanded(false);
+            });
+        })();
+    </script>
+</body>
+</html>
